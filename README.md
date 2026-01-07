@@ -77,6 +77,26 @@ This project uses custom Cypress commands defined in the support files:
 - `cy.fillPassword()`
 - `cy.clickSubmit()`
 
+## Versioning and Releases
+
+This project uses automated semantic versioning. When changes are pushed to the main/master branch:
+- A new tag is automatically created with an incremented patch version (e.g., v0.1.0 → v0.1.1)
+- A GitHub release is automatically generated
+
+### Manual Version Bumps
+
+To manually bump to a minor or major version:
+
+```bash
+# For minor version bump (v0.1.0 → v0.2.0)
+git tag -a v0.2.0 -m "Minor version bump"
+git push origin v0.2.0
+
+# For major version bump (v0.1.0 → v1.0.0)
+git tag -a v1.0.0 -m "Major version bump"
+git push origin v1.0.0
+```
+
 ## Contributing
 
 When adding new tests:

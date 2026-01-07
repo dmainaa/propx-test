@@ -1,5 +1,12 @@
 {
+  "name": "propx-test",
+  "version": "0.1.0",
+  "description": "Cypress E2E tests for PropX application",
   "devDependencies": {
     "cypress": "^15.8.1"
+  },
+  "scripts": {
+    "test": "cypress run",
+    "test:open": "cypress open"
   }
 }

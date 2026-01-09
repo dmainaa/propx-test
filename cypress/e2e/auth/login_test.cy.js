@@ -1,7 +1,7 @@
 
 describe('Login Test Suite', () => {
     beforeEach(() => {
-        cy.visit('http://localhost:5173/auth/login?redirect=/login')
+        cy.goToLogin()
         cy.get('input[type="text"]').as('emailInputField')
         cy.get('input[type="password"]').as('passwordInputField')
         cy.get('button[type="submit"]').as('submitButton')

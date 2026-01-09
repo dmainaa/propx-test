@@ -13,5 +13,8 @@
 // https://on.cypress.io/configuration
 // ***********************************************************
 
-// Import commands.js using ES2015 syntax:
-import './commands'
+// Import commands using ES2015 syntax:
+import './commands/index'
+
+// Alternative: You can also import the old commands.js if you want to keep it
+// import './commands'

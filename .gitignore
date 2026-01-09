@@ -6,6 +6,9 @@ cypress/screenshots/
 cypress/videos/
 cypress/downloads/
 
+# Backup files
+*.backup
+
 # Test results
 test-results/
 reports/

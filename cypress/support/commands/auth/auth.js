@@ -51,3 +51,125 @@ Cypress.Commands.add('login', (email, password) => {
     cy.fillPassword(password)
     cy.clickSubmit()
 })
+
+/**
+ * Complete registration workflow for creating tenant, landlord, or agent accounts
+ * @param {Object} options - Registration options
+ * @param {string} options.portalType - The portal type: 'tenant', 'landlord', or 'agent'
+ * @param {string} [options.firstName] - First name (auto-generated if not provided)
+ * @param {string} [options.lastName] - Last name (auto-generated if not provided)
+ * @param {string} [options.phoneNumber] - Phone number (auto-generated if not provided)
+ * @param {string} [options.email] - Email address (auto-generated if not provided)
+ * @param {string} [options.password] - Password (auto-generated if not provided)
+ * @param {boolean} [options.waitForApi=true] - Whether to wait for the register API call
+ * @param {boolean} [options.verifyRedirect=true] - Whether to verify the redirect URL
+ * @returns {Cypress.Chainable} Returns an object with user details
+ *
+ * @example
+ * // Create a landlord with auto-generated data
+ * cy.registerUser({ portalType: 'landlord' })
+ *
+ * @example
+ * // Create a tenant with specific email
+ * cy.registerUser({
+ *   portalType: 'tenant',
+ *   email: 'john@example.com'
+ * })
+ *
+ * @example
+ * // Create an agent without waiting for API or redirect verification
+ * cy.registerUser({
+ *   portalType: 'agent',
+ *   waitForApi: false,
+ *   verifyRedirect: false
+ * })
+ */
+Cypress.Commands.add('registerUser', (options = {}) => {
+    const {
+        portalType,
+        firstName,
+        lastName,
+        phoneNumber,
+        email,
+        password,
+        waitForApi = true,
+        verifyRedirect = true
+    } = options
+
+    // Validate portal type
+    const validPortalTypes = ['tenant', 'landlord', 'agent']
+    if (!portalType || !validPortalTypes.includes(portalType)) {
+        throw new Error(`Invalid portalType. Must be one of: ${validPortalTypes.join(', ')}`)
+    }
+
+    // Generate user data
+    const userData = {
+        firstName: firstName || Cypress.generateRandomString(8, 'alphabetic'),
+        lastName: lastName || Cypress.generateRandomString(10, 'alphabetic'),
+        phoneNumber: phoneNumber || Cypress.generateRandomPhone(),
+        email: email || Cypress.generateRandomEmail(),
+        password: password || Cypress.generateRandomPassword(12)
+    }
+
+    // Setup API intercept if needed
+    if (waitForApi) {
+        cy.intercept('POST', '**/auth/register').as('registerRequest')
+    }
+
+    // Navigate to register page
+    cy.visit('http://localhost:5173/auth/register')
+
+    // Setup aliases for form elements
+    cy.get("label[aria-label='Tenant']").find('input[name="portal"][type="radio"]').as('tenantPortalSelector')
+    cy.get("label[aria-label='Landlord']").find('input[name="portal"][type="radio"]').as('landlordPortalSelector')
+    cy.get("label[aria-label='Agent']").find('input[name="portal"][type="radio"]').as('agentPortalSelector')
+    cy.get("input[type='text'][placeholder='John']").as('firstNameInputField')
+    cy.get("input[type='text'][placeholder='Nogh']").as('lastNameInputField')
+    cy.get("input[type='tel'][placeholder='Enter phone number']").as('phoneInputField')
+    cy.get("input[type='email']").as('emailInputField')
+    cy.get("input[type='password'][placeholder='Create a password']").as('passwordInputField')
+    cy.get("input[type='password'][placeholder='Confirm your password']").as('confirmPasswordInputField')
+    cy.contains('I Agree To Terms & Conditions').as('termsCheckBox')
+    cy.contains('I Agree To Privacy Policy').as('privacyPolicy')
+    cy.get('button[type="submit"]').as('submitButton')
+
+    // Select portal type
+    if (portalType === 'tenant') {
+        cy.get('@tenantPortalSelector').click()
+    } else if (portalType === 'landlord') {
+        cy.get('@landlordPortalSelector').click()
+    } else if (portalType === 'agent') {
+        cy.get('@agentPortalSelector').click()
+    }
+
+    // Fill form fields
+    cy.fillFirstName(userData.firstName)
+    cy.fillLastName(userData.lastName)
+    cy.fillPhoneNumber(userData.phoneNumber)
+    cy.fillEmail(userData.email)
+    cy.fillPassword(userData.password)
+    cy.fillConfirmPassword(userData.password)
+    cy.checkTermsCheckbox()
+    cy.checkPrivacyPolicyCheckbox()
+
+    // Submit form
+    cy.clickSubmit()
+
+    // Wait for API response if enabled
+    if (waitForApi) {
+        cy.wait('@registerRequest').its('response.statusCode').should('eq', 200)
+    }
+
+    // Verify redirect if enabled
+    if (verifyRedirect) {
+        const redirectPaths = {
+            tenant: '/onboarding/lease-application',
+            landlord: '/onboarding/company',
+            agent: '/agent/company-switch'
+        }
+        cy.url().should('include', redirectPaths[portalType])
+    }
+
+    // Return user data for further use
+    return cy.wrap(userData)
+})

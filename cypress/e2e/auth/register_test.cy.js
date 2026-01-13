@@ -228,7 +228,7 @@ describe('Register Test Suite', () => {
         cy.url().should('include', '/onboarding/lease-application')
     })
 
-    it('Should redirect to agent/company-switch when agent is selected and form is submitted', () => {
+    it('Should redirect to /agent when agent is selected and form is submitted', () => {
 
         cy.intercept('POST', '**/auth/register').as('registerRequest')
         cy.get('@agentPortalSelector').click()

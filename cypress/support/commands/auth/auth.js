@@ -47,8 +47,13 @@ Cypress.Commands.add('clickSubmit', () => {
 })
 
 Cypress.Commands.add('login', (email, password) => {
-    cy.fillEmail(email)
-    cy.fillPassword(password)
+    cy.visit('http://localhost:5173/auth/login')
+    cy.get('input[type="text"][placeholder="you@example.com or +254712345678"]').as('emailInputField')
+    cy.get('input[type="password"]').as('passwordInputField')
+    cy.get('button[type="submit"]').as('submitButton')
+    cy.get('@emailInputField').type(email)
+    cy.get('@passwordInputField').type(password)
+
     cy.clickSubmit()
 })
 

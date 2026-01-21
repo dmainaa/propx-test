@@ -16,5 +16,8 @@
 // Import commands using ES2015 syntax:
 import './commands/index'
 
+// Import Cypress Lighthouse commands
+import '@cypress-audit/lighthouse'
+
 // Alternative: You can also import the old commands.js if you want to keep it
 // import './commands'

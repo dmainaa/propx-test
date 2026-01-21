@@ -6,6 +6,9 @@
 // Authentication commands
 import './auth/auth'
 
+// API commands
+import './api/auth/auth_api'
+
 // Navigation commands
 import './navigation'
 
@@ -14,3 +17,6 @@ import './forms'
 
 // Utility commands
 import './utilities'
+
+// Landlord commands
+import './landlord/landlord'

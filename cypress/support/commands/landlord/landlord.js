@@ -8,19 +8,16 @@ Cypress.Commands.add('fillCompanyPersonalInfoDetails', (options = {}) => {
         registrationNumber
     } = options
 
-    // Validate ID type
     const validIdTypes = ['nationalId', 'businessLicense', 'passport']
     if (!validIdTypes.includes(idType)) {
         throw new Error(`Invalid idType. Must be one of: ${validIdTypes.join(', ')}`)
     }
 
-    // Generate data if not provided
     const company = companyName || `${Cypress.generateRandomString(8, 'alphabetic')} Ltd`
     const phone = phoneNumber || Cypress.generateRandomPhone()
     const address = companyAddress || `${Cypress.generateRandomString(10, 'numeric')} ${Cypress.generateRandomString(8, 'alphabetic')} Street, Nairobi`
     const regNumber = registrationNumber || Cypress.generateRandomString(8, 'numeric')
 
-    // Setup aliases
     cy.get('input[placeholder="Enter your company name"]').as('companyNameInputField')
     cy.get('input[placeholder="Enter phone number"][inputmode="tel"]').as('phoneInputField')
     cy.get('input[placeholder="Enter your company address"]').as('companyAddressInputField')
@@ -29,16 +26,12 @@ Cypress.Commands.add('fillCompanyPersonalInfoDetails', (options = {}) => {
     cy.get('label[aria-label="Passport"]').find('input[type="radio"]').as('passportSelector')
     cy.get('input[placeholder="Enter registration number"]').as('registrationNumberInputField')
 
-    // Fill company name
     cy.get('@companyNameInputField').scrollIntoView().type(company)
 
-    // Fill phone number
     cy.get('@phoneInputField').scrollIntoView().type(phone)
 
-    // Fill company address
     cy.get('@companyAddressInputField').scrollIntoView().type(address)
 
-    // Select ID type
     if (idType === 'nationalId') {
         cy.get('@nationalIdSelector').scrollIntoView().click()
     } else if (idType === 'businessLicense') {
@@ -47,10 +40,8 @@ Cypress.Commands.add('fillCompanyPersonalInfoDetails', (options = {}) => {
         cy.get('@passportSelector').scrollIntoView().click()
     }
 
-    // Fill registration number
     cy.get('@registrationNumberInputField').scrollIntoView().type(regNumber)
 
-    // Click Next button
     cy.contains('Next').scrollIntoView().click()
 })
 
@@ -121,27 +112,22 @@ Cypress.Commands.add('fillCompanyTaxDetails', (options = {}) => {
     cy.get('span').contains('Professional').prev('div').find('input[type="checkbox"]').scrollIntoView().as('withholdingProfessionalCheckbox')
     cy.get('span').contains('Rental').prev('div').find('input[type="checkbox"]').scrollIntoView().as('withholdingRentalCheckbox')
 
-    // Select has VAT option
     if (hasVat) {
         cy.get('@hasVatYesInputField').click()
     } else {
         cy.get('@hasVatNoInputField').click()
     }
 
-    // Select can change VAT option
     if (canChangeVat) {
         cy.get('@canChangeVatYesInputField').click()
     } else {
         cy.get('@canChangeVatNoInputField').click()
     }
 
-    // Fill country
     cy.get('@countryInputField').clear().type(country)
 
-    // Fill tax PIN
     cy.get('@taxPinInputField').type(pin)
 
-    // Select withholding tax types
     withholdingTaxTypes.forEach(type => {
         const normalizedType = type.toLowerCase()
         if (normalizedType === 'vat') {
@@ -155,6 +141,89 @@ Cypress.Commands.add('fillCompanyTaxDetails', (options = {}) => {
         }
     })
 
-    // Click Next button
+    cy.contains('Next').scrollIntoView().click()
+})
+
+Cypress.Commands.add('fillCompanyBankDetails', (options = {}) => {
+    const {
+        bankIndex = 0,
+        branchIndex = 0,
+        accountName,
+        accountNumber,
+        collectionContract = true
+    } = options
+
+    const accName = accountName || `${Cypress.generateRandomString(8, 'alphabetic')} Ltd Account`
+    const accNumber = accountNumber || Cypress.generateRandomString(10, 'numeric')
+
+    cy.get('input[placeholder="Search and select bank..."]').scrollIntoView().as('bankNameInputField')
+    cy.get('input[placeholder="Search and select branch..."]').scrollIntoView().as('branchInputField')
+    cy.get('input[placeholder="Enter account name"]').scrollIntoView().as('accountNameInputField')
+    cy.get('input[placeholder="Enter your account number"]').scrollIntoView().as('accountNumberInputField')
+    cy.get('input[type="radio"][name="collection_contract"][value="true"]').scrollIntoView().as('collectionContractYesSelector')
+    cy.get('input[type="radio"][name="collection_contract"][value="false"]').scrollIntoView().as('collectionContractNoSelector')
+
+    cy.get('@bankNameInputField').click()
+    cy.get('@bankNameInputField')
+        .parent()
+        .parent()
+        .find('ul')
+        .should('be.visible')
+        .as('bankDropdownList')
+    cy.get('@bankDropdownList').find('li').eq(bankIndex).click()
+    cy.get('@branchInputField').click()
+    cy.get('@branchInputField')
+        .parent()
+        .parent()
+        .find('ul')
+        .should('be.visible')
+        .as('branchDropdownList')
+    cy.get('@branchDropdownList').find('li').eq(branchIndex).click()
+    cy.get('@accountNameInputField').type(accName)
+    cy.get('@accountNumberInputField').type(accNumber)
+
+    if (collectionContract) {
+        cy.get('@collectionContractYesSelector').click()
+    } else {
+        cy.get('@collectionContractNoSelector').click()
+    }
+
+    cy.contains('Next').scrollIntoView().click()
+})
+
+Cypress.Commands.add('uploadCompanyDocuments', (options = {}) => {
+    const {
+        businessLicenseFile = 'bank-statement-08-21-17.png',
+        taxPinCertificateFile = 'bank-statement-08-21-17.png',
+        otherDocumentsFile = 'bank-statement-08-21-17.png'
+    } = options
+
+    cy.contains('label', 'Business License / Registration Certificate')
+        .parent()
+        .parent()
+        .find('input[type="file"][accept=".pdf,.jpg,.jpeg,.png"]')
+        .scrollIntoView()
+        .as('businessLicenseUploadInputField')
+
+    cy.contains('label', 'Tax PIN Certificate')
+        .parent()
+        .parent()
+        .find('input[type="file"][accept=".pdf,.jpg,.jpeg,.png"]')
+        .scrollIntoView()
+        .as('taxPinCertificateUploadInputField')
+
+    cy.contains('label', 'Other Relevant Documents')
+        .parent()
+        .parent()
+        .find('input[type="file"][accept=".pdf,.jpg,.jpeg,.png"]')
+        .scrollIntoView()
+        .as('otherDocumentsUploadInputField')
+
+    cy.get('@businessLicenseUploadInputField').attachFile(businessLicenseFile)
+
+    cy.get('@taxPinCertificateUploadInputField').attachFile(taxPinCertificateFile)
+
+    cy.get('@otherDocumentsUploadInputField').attachFile(otherDocumentsFile)
+
     cy.contains('Next').scrollIntoView().click()
 })

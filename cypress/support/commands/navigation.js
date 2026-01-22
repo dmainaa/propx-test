@@ -70,5 +70,5 @@ Cypress.Commands.add('verifyUrlIncludes', (path) => {
 })
 
 Cypress.Commands.add('getNextButton', () => {
-    cy.get('button').contains('Next').as('nextButton')
+    cy.get('button').contains('Next').scrollIntoView().as('nextButton')
 })

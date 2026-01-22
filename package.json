@@ -5,7 +5,8 @@
   "devDependencies": {
     "@cypress-audit/lighthouse": "^1.4.2",
     "cypress": "^15.8.1",
-    "cypress-audit": "^1.1.0"
+    "cypress-audit": "^1.1.0",
+    "cypress-file-upload": "^5.0.8"
   },
   "scripts": {
     "test": "cypress run",

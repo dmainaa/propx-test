@@ -1,6 +1,3 @@
-/**
- * Utility custom commands
- */
 
 const generateRandomString = (length = 10, charset = 'alphanumeric') => {
     let characters
@@ -94,5 +91,12 @@ Cypress.Commands.add('generateRandomPhone', (format = 'US') => {
 
 Cypress.Commands.add('generateRandomPassword', (length = 12) => {
     return generateRandomPassword(length)
+})
+
+Cypress.Commands.add('seedData', (data) => {
+        cy.fixture('example.json').then((fetchedData)=> {
+            data = fetchedData
+        })
+    
 })
 

@@ -19,5 +19,8 @@ import './commands/index'
 // Import Cypress Lighthouse commands
 import '@cypress-audit/lighthouse'
 
+import 'cypress-file-upload';
+
+
 // Alternative: You can also import the old commands.js if you want to keep it
 // import './commands'

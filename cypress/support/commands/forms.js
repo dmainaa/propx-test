@@ -60,10 +60,12 @@ Cypress.Commands.add('fillFullName', (name, selector) => {
  * @example cy.fillEmail('user@example.com', cy.get('@emailInputField'))
  */
 Cypress.Commands.add('fillEmail', (email, selector) => {
+
+    let selectedEmail = email || Cypress.generateRandomEmail()
     if (selector != null) {
-        selector.clear().type(email)
+        cy.get(selector).clear().type(selectedEmail)
     } else {
-        cy.get('input[type="email"][placeholder="Enter email address"]').clear().type(email)
+        cy.get('input[type="email"]').clear().type(selectedEmail)
     }
 })
 

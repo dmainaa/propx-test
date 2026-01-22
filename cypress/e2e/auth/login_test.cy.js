@@ -1,7 +1,7 @@
 
 describe('Login Test Suite', () => {
     beforeEach(() => {
-        cy.goToLogin()
+        cy.visit('http://localhost:5173/auth/login')
         cy.get('input[type="text"]').as('emailInputField')
         cy.get('input[type="password"]').as('passwordInputField')
         cy.get('button[type="submit"]').as('submitButton')
@@ -18,13 +18,13 @@ describe('Login Test Suite', () => {
     })
 
     it('Verify if the password field is empty and sign-in button is clicked, the appropriate message is shown', () => {
-        cy.fillEmail('someemail@gmail.com')
+        cy.fillEmail('someemail@gmail.com', '@emailInputField')
         cy.clickSubmit()
         cy.contains('Password is required').should('be.visible')
     })
 
     it('Verify if the entered password is less than 6 characters, the appropriate message is shown', () => {
-        cy.fillEmail('someemail@gmail.com')
+        cy.fillEmail('someemail@gmail.com', '@emailInputField')
         cy.fillPassword('Pass')
         cy.clickSubmit()
         cy.contains('Password must be at least 6 characters').should('be.visible')
@@ -32,7 +32,7 @@ describe('Login Test Suite', () => {
 
     it('Verify if the login credentials are invalid, the appropriate message is shown', () => {
         cy.intercept('POST', '**/login').as('loginRequest')
-        cy.fillEmail('averyfakeemail@gmail.com')
+        cy.fillEmail('someemail@gmail.com', '@emailInputField')
         cy.fillPassword('Password')
         cy.clickSubmit()
         cy.wait('@loginRequest')
@@ -40,10 +40,10 @@ describe('Login Test Suite', () => {
     })
 
     it('Verify when the right credentials are filled, the user is redirected to the dashboard screen', () => {
-        cy.fillEmail('0715823592')
+        cy.fillEmail('0715823592', '@emailInputField')
         cy.fillPassword('password')
         cy.clickSubmit()
-        cy.url().should('include', '/dashboard')
+        cy.url().should('include', '/portal-selection')
     })
 
 

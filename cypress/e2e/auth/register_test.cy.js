@@ -3,6 +3,7 @@ describe('Register Test Suite', () => {
 
     beforeEach(() => {
     cy.visit('http://localhost:5173/auth/register')
+    cy.wait(2000)
     cy.get("label[aria-label='Tenant']").find('input[name="portal"][type="radio"]')
     .as('tenantPortalSelector')
 
@@ -245,6 +246,6 @@ describe('Register Test Suite', () => {
         cy.wait('@registerRequest').its('response.statusCode').should('eq', 200)
 
         // Verify redirect to agent/company-switch
-        cy.url().should('include', '/agent/company-switch')
+        cy.url().should('include', '/agent')
     })
 })

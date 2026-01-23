@@ -2,7 +2,7 @@
 const generateRandomString = (length = 10, charset = 'alphanumeric') => {
     let characters
 
-    switch(charset) {
+    switch (charset) {
         case 'alphanumeric':
             characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
             break
@@ -94,9 +94,31 @@ Cypress.Commands.add('generateRandomPassword', (length = 12) => {
 })
 
 Cypress.Commands.add('seedData', (data) => {
-        cy.fixture('example.json').then((fetchedData)=> {
-            data = fetchedData
-        })
-    
+    cy.fixture('example.json').then((fetchedData) => {
+        data = fetchedData
+    })
+
+})
+
+Cypress.Commands.add('initializeSideBar', () => {
+    cy.contains('a', 'Dashboard')
+        .scrollIntoView()
+        .as('dashboardMenu');
+    cy.contains('.font-medium.flex-1', 'Tenant Management')
+        .scrollIntoView()
+        .as('tenantManagementMenu');
+    cy.contains('.font-medium.flex-1', 'Expense Management')
+        .scrollIntoView()
+        .as('expenseManagementMenu');
+    cy.contains('.font-medium.flex-1', 'Property Management')
+        .scrollIntoView()
+        .as('propertyManagementMenu');
+    cy.contains('.font-medium.flex-1', 'Finance Management')
+        .scrollIntoView()
+        .as('financeManagementMenu');
+    cy.contains('.font-medium.flex-1', 'Reports Analytics')
+        .scrollIntoView()
+        .as('reportsAnalyticsMenu');
+
 })
 

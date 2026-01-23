@@ -6,9 +6,10 @@ describe('Fill Company Bank Details Test Suite', () => {
         })
     } )
     
-    
+
     beforeEach(() => {
         cy.login(data.companyCreationEmail, data.password)
+
         cy.url().should('include', '/onboarding/company')
         cy.fillCompanyPersonalInfoDetails()
         cy.fillCompanyServiceTypeDetails()
@@ -20,9 +21,11 @@ describe('Fill Company Bank Details Test Suite', () => {
         cy.get('input[placeholder="Enter your account number"]').scrollIntoView().as('accountNumberInputField');
         cy.get('input[type="radio"][name="collection_contract"][value="true"]').scrollIntoView().as('collectionContractYesSelector');
         cy.get('input[type="radio"][name="collection_contract"][value="false"]').scrollIntoView().as('collectionContractNoSelector');
-    })
 
+    })
+    
     it('should verify all bank details elements are visible', () => {
+        
         cy.get('@bankNameInputField').should('be.visible');
         cy.get('@branchInputField').should('be.visible');
         cy.get('@accountNameInputField').should('be.visible');
@@ -32,7 +35,7 @@ describe('Fill Company Bank Details Test Suite', () => {
     })
 
     it('should enable next button when all required fields are filled', () => {
-        // Select bank from dropdown
+
         cy.get('@bankNameInputField').click();
         cy.get('@bankNameInputField')
             .parent()

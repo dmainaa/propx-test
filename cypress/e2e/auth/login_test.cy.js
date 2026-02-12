@@ -1,7 +1,10 @@
+import { ROUTES } from '../../support/routes/routes';
+import { SEGMENTS } from '../../support/routes/segments'
 
 describe('Login Test Suite', () => {
     beforeEach(() => {
-        cy.visit('http://localhost:5173/auth/login')
+
+        cy.visit(ROUTES.auth.child(SEGMENTS.AUTH.LOGIN))
         cy.get('input[type="text"]').as('emailInputField')
         cy.get('input[type="password"]').as('passwordInputField')
         cy.get('button[type="submit"]').as('submitButton')

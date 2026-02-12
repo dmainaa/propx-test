@@ -1,6 +1,4 @@
-/**
- * Authentication-related custom commands
- */
+
 
 Cypress.Commands.add('fillFirstName', (firstName) => {
     const name = firstName || Cypress.generateRandomString(8, 'alphabetic')
@@ -47,7 +45,7 @@ Cypress.Commands.add('clickSubmit', () => {
 })
 
 Cypress.Commands.add('login', (email, password) => {
-    cy.visit('http://localhost:5173/auth/login')
+    cy.visit(`http://localhost:3000/auth/login`)
     cy.get('input[type="text"][placeholder="you@example.com or +254712345678"]').as('emailInputField')
     cy.get('input[type="password"]').as('passwordInputField')
     cy.get('button[type="submit"]').as('submitButton')
@@ -122,7 +120,7 @@ Cypress.Commands.add('registerUser', (options = {}) => {
     }
 
     // Navigate to register page
-    cy.visit('http://localhost:5173/auth/register')
+    cy.visit(`${appUrls.baseUrl}${appUrls.auth.register}`)
 
     // Setup aliases for form elements
     cy.get("label[aria-label='Tenant']").find('input[name="portal"][type="radio"]').as('tenantPortalSelector')
@@ -168,9 +166,9 @@ Cypress.Commands.add('registerUser', (options = {}) => {
     // Verify redirect if enabled
     if (verifyRedirect) {
         const redirectPaths = {
-            tenant: '/onboarding/lease-application',
-            landlord: '/onboarding/company',
-            agent: '/agent/company-switch'
+            tenant: appUrls.onboarding.leaseApplication,
+            landlord: appUrls.onboarding.company,
+            agent: appUrls.agent.companySwitch
         }
         cy.url().should('include', redirectPaths[portalType])
     }

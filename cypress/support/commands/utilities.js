@@ -122,3 +122,34 @@ Cypress.Commands.add('initializeSideBar', () => {
 
 })
 
+Cypress.Commands.add('selectDate', (day = 1, month, year) => {
+
+    cy.get('div[data-dismissable-layer]').scrollIntoView().as('datePicker')
+    cy.get('@datePicker').find('button').eq(1).as('monthPicker')
+    cy.get('@datePicker').find('button').eq(2).as('yearPicker')
+
+    if(year != null) {
+        cy.get('@yearPicker').click()
+        cy.contains(year).click()
+    }
+
+    if(month != null) {
+        cy.get('@monthPicker').click()
+        cy.contains(month).click()
+    }
+
+    cy.get('@datePicker').contains(day).click()
+})
+
+Cypress.Commands.add('selectDropdownItem', (query) => {
+
+    cy.get('ul').as('dropdownList')
+   
+    if(query != null) {
+        cy.get('@dropdownList').find('li').contains(query).click()
+    } else {
+        cy.get('@dropdownList').find('li').first().click()
+    }
+
+})
+

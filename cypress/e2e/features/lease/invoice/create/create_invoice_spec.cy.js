@@ -11,38 +11,38 @@ describe('Create Invoice Test Suite', () => {
 
   });
 
-//   it('verifies all form fields are visible', () => {
-//     createInvoicePage.dueDateButton.should('be.visible');
-//     createInvoicePage.selectLeaseInput.should('be.visible');
-//     createInvoicePage.invoiceNotes.should('be.visible');
+  it('verifies all form fields are visible', () => {
+    createInvoicePage.dueDateButton.should('be.visible');
+    createInvoicePage.selectLeaseInput.should('be.visible');
+    createInvoicePage.invoiceNotes.should('be.visible');
 
-//     createInvoicePage.component.should('be.visible');
-//     createInvoicePage.itemNotes.should('be.visible');
-//     createInvoicePage.qty.should('be.visible');
-//     createInvoicePage.amount.should('be.visible');
-//     createInvoicePage.tax.should('be.visible');
-//   });
+    createInvoicePage.component.should('be.visible');
+    createInvoicePage.itemNotes.should('be.visible');
+    createInvoicePage.qty.should('be.visible');
+    createInvoicePage.amount.should('be.visible');
+    createInvoicePage.tax.should('be.visible');
+  });
 
-//   it('fills in a complete invoice item', () => {
-//     createInvoicePage.selectDueDate('Mar 15, 2025');
-//     createInvoicePage.searchAndSelectLease('Lease #1001');
-//     createInvoicePage.fillInvoiceNotes('Monthly billing cycle');
+  it('fills in a complete invoice item', () => {
+    createInvoicePage.selectDueDate('Mar 15, 2025');
+    createInvoicePage.searchAndSelectLease('Lease #1001');
+    createInvoicePage.fillInvoiceNotes('Monthly billing cycle');
 
-//     createInvoicePage.fillInvoiceItem({
-//       component: 'Rent',
-//       notes:     'April rent',
-//       qty:       '1',
-//       amount:    '25000',
-//       tax:       'VAT 16%',
-//     });
-//   });
+    createInvoicePage.fillInvoiceItem({
+      component: 'Rent',
+      notes:     'April rent',
+      qty:       '1',
+      amount:    '25000',
+      tax:       'VAT 16%',
+    });
+  });
 
   it('enables the Create Invoice button when all fields are filled', () => {
     createInvoicePage.addInvoiceButton.should('be.disabled');
 
     createInvoicePage.selectDueDate();
     createInvoicePage.searchAndSelectLease();
-    createInvoicePage.fillInvoiceItem({ component: true, qty: 1, amount: 29000, tax: 'VAT 16%' });
+    createInvoicePage.fillInvoiceItem({ component: true, notes: 'Monthly billing cycle', qty: 1, amount: 29000, tax: 'VAT 16%' });
 
     createInvoicePage.addInvoiceButton.should('be.enabled');
   });
@@ -52,7 +52,7 @@ describe('Create Invoice Test Suite', () => {
 
     createInvoicePage.createInvoice({
       notes: 'Monthly billing cycle',
-      item:  { component: true, qty: true, amount: true, tax: true },
+      item:  { component: true, qty: 1, amount: 10000, tax: true },
     });
 
     cy.wait('@createInvoiceRequest').then(({ response }) => {

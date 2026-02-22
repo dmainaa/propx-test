@@ -58,7 +58,7 @@ class CreateInvoicePage {
 
   fillInvoiceItem({ component, notes, qty, amount, tax } = {}) {
     if (component) this.searchAndSelectItemComponent();
-    if (notes)     this.itemNotes.type(notes);
+    if (notes)     this.fillInvoiceNotes(notes);
    
     if (amount)    this.amount.clear().type(amount);
     if (tax)       this.searchAndSelectTaxType();

@@ -93,8 +93,8 @@ Cypress.Commands.add('generateRandomPassword', (length = 12) => {
     return generateRandomPassword(length)
 })
 
-Cypress.Commands.add('seedData', (data) => {
-    cy.fixture('example.json').then((fetchedData) => {
+Cypress.Commands.add('seedData', (data, fixtureName) => {
+    cy.fixture(fixtureName || 'example.json').then((fetchedData) => {
         data = fetchedData
     })
 
@@ -152,4 +152,9 @@ Cypress.Commands.add('selectDropdownItem', (query) => {
     }
 
 })
+
+Cypress.Commands.add('checkIfTableIsPopulated', () => {
+    cy.get('table').find('tbody tr').should('have.length.greaterThan', 0);
+});
+
 

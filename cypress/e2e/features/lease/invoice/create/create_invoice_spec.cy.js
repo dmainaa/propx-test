@@ -1,4 +1,4 @@
-import createInvoicePage from './create_invoice_page';
+import createInvoicePage from '../../../../pages/invoice/create_invoice_page';
 import { ROUTES } from '../../../../../support/routes/routes';
 import { SEGMENTS } from '../../../../../support/routes/segments';
 
@@ -15,7 +15,6 @@ describe('Create Invoice Test Suite', () => {
     createInvoicePage.dueDateButton.should('be.visible');
     createInvoicePage.selectLeaseInput.should('be.visible');
     createInvoicePage.invoiceNotes.should('be.visible');
-
     createInvoicePage.component.should('be.visible');
     createInvoicePage.itemNotes.should('be.visible');
     createInvoicePage.qty.should('be.visible');

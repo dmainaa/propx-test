@@ -1,0 +1,17 @@
+{
+    "invoiceListTitle": "Invoices",
+    "invoiceListDescription": "View, Print & Create Invoice From Here.",
+    "tableHeaders": [
+        "Invoice",
+        "Date",
+        "Tenant",
+        "Unit",
+        "Total",
+        "Balance",
+        "Due",
+        "Status",
+        "Action"
+    ],
+    "createButtonText": "Create a invoice",
+    "searchHintText": "Search invoices..."
+}

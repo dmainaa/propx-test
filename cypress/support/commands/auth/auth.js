@@ -1,4 +1,5 @@
-
+import { ROUTES } from "../../routes/routes"
+import { SEGMENTS } from "../../routes/segments"
 
 Cypress.Commands.add('fillFirstName', (firstName) => {
     const name = firstName || Cypress.generateRandomString(8, 'alphabetic')
@@ -45,7 +46,7 @@ Cypress.Commands.add('clickSubmit', () => {
 })
 
 Cypress.Commands.add('login', (email, password) => {
-    cy.visit(`http://localhost:3000/auth/login`)
+    cy.visit(ROUTES.auth.child(SEGMENTS.AUTH.LOGIN))
     cy.get('input[type="text"][placeholder="you@example.com or +254712345678"]').as('emailInputField')
     cy.get('input[type="password"]').as('passwordInputField')
     cy.get('button[type="submit"]').as('submitButton')
@@ -55,38 +56,23 @@ Cypress.Commands.add('login', (email, password) => {
     cy.clickSubmit()
 })
 
-/**
- * Complete registration workflow for creating tenant, landlord, or agent accounts
- * @param {Object} options - Registration options
- * @param {string} options.portalType - The portal type: 'tenant', 'landlord', or 'agent'
- * @param {string} [options.firstName] - First name (auto-generated if not provided)
- * @param {string} [options.lastName] - Last name (auto-generated if not provided)
- * @param {string} [options.phoneNumber] - Phone number (auto-generated if not provided)
- * @param {string} [options.email] - Email address (auto-generated if not provided)
- * @param {string} [options.password] - Password (auto-generated if not provided)
- * @param {boolean} [options.waitForApi=true] - Whether to wait for the register API call
- * @param {boolean} [options.verifyRedirect=true] - Whether to verify the redirect URL
- * @returns {Cypress.Chainable} Returns an object with user details
- *
- * @example
- * // Create a landlord with auto-generated data
- * cy.registerUser({ portalType: 'landlord' })
- *
- * @example
- * // Create a tenant with specific email
- * cy.registerUser({
- *   portalType: 'tenant',
- *   email: 'john@example.com'
- * })
- *
- * @example
- * // Create an agent without waiting for API or redirect verification
- * cy.registerUser({
- *   portalType: 'agent',
- *   waitForApi: false,
- *   verifyRedirect: false
- * })
- */
+Cypress.Commands.add('loginAsSuperAdmin', () => {
+
+    cy.fixture('userdata.json').then((userData) => {
+        cy.visit(ROUTES.auth.child(SEGMENTS.AUTH.LOGIN))
+        cy.get('input[type="text"][placeholder="you@example.com or +254712345678"]').as('emailInputField')
+        cy.get('input[type="password"]').as('passwordInputField')
+        cy.get('button[type="submit"]').as('submitButton')
+        cy.get('@emailInputField').type(userData.superAdminemail)
+        cy.get('@passwordInputField').type(userData.superAdminPassword)
+    
+        cy.clickSubmit()
+        cy.contains('Staff').click()
+        cy.contains('Property Management').click()
+    })
+
+})
+
 Cypress.Commands.add('registerUser', (options = {}) => {
     const {
         portalType,
@@ -120,7 +106,7 @@ Cypress.Commands.add('registerUser', (options = {}) => {
     }
 
     // Navigate to register page
-    cy.visit(`${appUrls.baseUrl}${appUrls.auth.register}`)
+    cy.visit(ROUTES.auth.child(SEGMENTS.AUTH.REGISTER))
 
     // Setup aliases for form elements
     cy.get("label[aria-label='Tenant']").find('input[name="portal"][type="radio"]').as('tenantPortalSelector')

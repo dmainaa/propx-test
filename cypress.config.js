@@ -7,6 +7,10 @@ try {
   // dotenv not installed, environment variables will come from process.env
 }
 
+const baseApiUrl = process.env.API_URL || 'https://propertyx.test/api/v1'
+const appApiUrl = '/app/1'
+
+
 module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
@@ -22,7 +26,12 @@ module.exports = defineConfig({
     },
     baseUrl: process.env.BASE_URL || 'http://localhost:3000',
     video: process.env.CYPRESS_VIDEO === 'true',
+    apiUrl: baseApiUrl,
+    appApiUrl: appApiUrl,
     screenshotOnRunFailure: process.env.CYPRESS_SCREENSHOT !== 'false',
+    env: {
+      appUrl: process.env.APP_URL
+    }
   },
 
   projectId: "jvu87n",

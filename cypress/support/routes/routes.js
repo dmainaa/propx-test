@@ -11,6 +11,6 @@ const buildRoute = (base) => (
 
 export const ROUTES = {
   dashboard: buildRoute(BASE_ROUTES.DASHBOARD),
-  users: buildRoute(BASE_ROUTES.LANDLORD),
+  app: buildRoute(BASE_ROUTES.APP),
   auth: buildRoute(BASE_ROUTES.AUTH),
 };

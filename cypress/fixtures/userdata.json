@@ -4,5 +4,6 @@
   "companyCreationEmail": "jasperthelandlord@gmail.com",
   "password": "Password",
   "superAdminemail": "0715823592",
-  "superAdminPassword": "password"
+  "superAdminPassword": "password",
+  "baseUrl": "http://localhost:5173/"
 }

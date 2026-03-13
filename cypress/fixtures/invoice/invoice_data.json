@@ -13,5 +13,43 @@
         "Action"
     ],
     "createButtonText": "Create a invoice",
-    "searchHintText": "Search invoices..."
+    "searchHintText": "Search invoices...",
+    "deleteButtonText": "Delete",
+    "invoiceNumberLabel": "Invoice Number",
+    "invoiceDetailsCard":  {
+        "title": "Invoice Details",
+        "labels": [
+            "Invoice Number",
+            "Due Date",
+            "Created"
+        ],
+        "notesLabel": "Notes"
+    },
+    "tenantInfoCard":  {
+        "title": "Tenant Information",
+        "labels": [
+            "Name",
+            "Lease ID",
+            "Next Due",
+            "Property",
+            "Currency"
+        ]
+    },
+    "invoiceSummaryCard":  {
+        "title": "Invoice Summary",
+        "labels": [
+            "Status:",
+            "Subtotal",
+            "Tax",
+            "Total",
+            "Paid",
+            "Balance"
+        ]
+    },
+    "viewInvoiceTabs": [
+        " Invoice Items",
+        " Receipt",
+        " Credit Note"
+    ]
+
 }

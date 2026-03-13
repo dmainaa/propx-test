@@ -1,6 +1,5 @@
 import invoiceData from '../../../fixtures/invoice/invoice_data.json'
 
-
   const apiUrl = Cypress.env('apiUrl')
   const invoiceUrl = `${apiUrl}${Cypress.env('appApiUrl')}/property-management/lease-management/invoices?page=1&per_page=10`
 
@@ -15,6 +14,9 @@ const selectors = {
 
 class ViewInvoicePage {
     
+    set invoiceId (value) {
+        this.invoiceId = value
+    }
     get invoiceTitleText() {return selectors.invoiceTitleText()}
     get cancelInvoiceButton() {return selectors.cancelInvoiceButton()}
     get invoiceDetailsCard() {return selectors.invoiceDetailsCard()}
@@ -24,10 +26,16 @@ class ViewInvoicePage {
     navigateToViewInvoicePage() {
         console.log(invoiceUrl)
         cy.intercept('GET', 'https://propx-core.on-forge.com/api/v1/app/1/property-management/lease-management/invoices?page=1&per_page=10').as('invoiceListApi')
+        cy.intercept('GET', "**invoices*").then((response) => {
+            expect(response.status).to.equal(200)
+            this.invoiceId = response.body.data.id
+        }).as('getInvoiceApi')
         cy.loginAsSuperAdmin()
         cy.visitInvoicesPage()
         cy.wait('@invoiceListApi')
         cy.get('tbody').find('tr').first().click()
+        cy.wait('@getInvoiceApi')
+        cy.url().should('include', `/invoice/${this.invoiceId}`)
     }
 
     checkInvoiceDetails() {

@@ -2,12 +2,12 @@
 describe('Register Test Suite', () => {
 
     beforeEach(() => {
-    cy.visit('http://localhost:5173/auth/register')
+    cy.visit('/auth/register')
     cy.wait(2000)
     cy.get("label[aria-label='Tenant']").find('input[name="portal"][type="radio"]')
     .as('tenantPortalSelector')
 
-    cy.get("label[aria-label='Landlord']").find('input[name="portal"][type="radio"]')
+    cy.get("label[aria-label='App']").find('input[name="portal"][type="radio"]')
     .as('landlordPortalSelector')
 
     cy.get("label[aria-label='Agent']").find('input[name="portal"][type="radio"]')

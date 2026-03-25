@@ -157,4 +157,7 @@ Cypress.Commands.add('checkIfTableIsPopulated', () => {
     cy.get('table').find('tbody tr').should('have.length.greaterThan', 0);
 });
 
+Cypress.Commands.add('checkCardLabelValue', (label) => {
+    label.parent().find('span').eq(1).should('not.be.empty')
+})
 

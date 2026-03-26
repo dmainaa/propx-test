@@ -1,53 +1,47 @@
-import { ROUTES } from '../../support/routes/routes';
-import { SEGMENTS } from '../../support/routes/segments'
+import loginPage from '../pages/auth/login_page'
 
 describe('Login Test Suite', () => {
-    beforeEach(() => {
 
-        cy.visit(ROUTES.auth.child(SEGMENTS.AUTH.LOGIN))
-        cy.get('input[type="text"]').as('emailInputField')
-        cy.get('input[type="password"]').as('passwordInputField')
-        cy.get('button[type="submit"]').as('submitButton')
+    beforeEach(() => {
+        loginPage.visit()
     })
 
     it('Verify that the username and password fields are visible', () => {
-        cy.get('@emailInputField').should('be.visible')
-        cy.get('@passwordInputField').should('be.visible')
+        loginPage.emailInputField.should('be.visible')
+        loginPage.passwordInputField.should('be.visible')
     })
 
     it('Verify if the username field is empty and sign-in button is clicked, the appropriate message is shown', () => {
-        cy.clickSubmit()
+        loginPage.clickSubmit()
         cy.contains('Email or phone number is required').should('be.visible')
     })
 
     it('Verify if the password field is empty and sign-in button is clicked, the appropriate message is shown', () => {
-        cy.fillEmail('someemail@gmail.com', '@emailInputField')
-        cy.clickSubmit()
+        loginPage.fillEmail('someemail@gmail.com')
+        loginPage.clickSubmit()
         cy.contains('Password is required').should('be.visible')
     })
 
     it('Verify if the entered password is less than 6 characters, the appropriate message is shown', () => {
-        cy.fillEmail('someemail@gmail.com', '@emailInputField')
-        cy.fillPassword('Pass')
-        cy.clickSubmit()
+        loginPage.fillEmail('someemail@gmail.com')
+        loginPage.fillPassword('Pass')
+        loginPage.clickSubmit()
         cy.contains('Password must be at least 6 characters').should('be.visible')
     })
 
     it('Verify if the login credentials are invalid, the appropriate message is shown', () => {
         cy.intercept('POST', '**/login').as('loginRequest')
-        cy.fillEmail('someemail@gmail.com', '@emailInputField')
-        cy.fillPassword('Password')
-        cy.clickSubmit()
+        loginPage.fillEmail('someemail@gmail.com')
+        loginPage.fillPassword('Password')
+        loginPage.clickSubmit()
         cy.wait('@loginRequest')
         cy.contains('User with that Email or Phone does not exists.')
     })
 
     it('Verify when the right credentials are filled, the user is redirected to the dashboard screen', () => {
-        cy.fillEmail('0715823592', '@emailInputField')
-        cy.fillPassword('password')
-        cy.clickSubmit()
+        loginPage.fillEmail('0715823592')
+        loginPage.fillPassword('password')
+        loginPage.clickSubmit()
         cy.url().should('include', '/portal-selection')
     })
-
-
 })

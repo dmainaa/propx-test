@@ -20,3 +20,10 @@ import './utilities'
 
 // Landlord commands
 import './landlord/landlord'
+
+
+// Property commands
+import './property/property'
+
+// Invoice commands
+import './invoice/invoice'

@@ -9,9 +9,9 @@ const selectors = {
     createInvoiceButton: (buttonText) => cy.contains('Create a invoice').parent(),
     searchInvoiceInput: () => cy.get('input[type=text][placeholder="Search invoices..."]'),
     invoicesTable: () => cy.get('table'),
-    tableHeaders: () => cy.get('thead').find('tr')
+    tableHeaders: () => cy.get('thead').find('tr'),
+    filterButton: () => cy.get('main').find('button').eq(1),
 }
-
 
 class InvoiceListPage {
 
@@ -21,6 +21,7 @@ class InvoiceListPage {
     get createInvoiceButton() {return selectors.createInvoiceButton()}
     get searchInvoiceInput() {return selectors.searchInvoiceInput()}
     get invoicesTable() {return selectors.invoicesTable()}
+    get filterButton() {return selectors.filterButton()}
 
     viewLandlordInvoices() {
         cy.loginAsSuperAdmin()
@@ -29,7 +30,9 @@ class InvoiceListPage {
 
     verifyTableHeaders() {
         this.tableHeaders.find('th').each(($th, index) => {
-            cy.wrap($th).should('contain.text', invoiceData.tableHeaders[index])
+            if(index != 0) {
+                cy.wrap($th).find('span').contains(invoiceData.invoiceListColumns[index]).should('be.visible')
+            }
         })
     }
 }

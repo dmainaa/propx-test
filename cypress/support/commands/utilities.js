@@ -161,3 +161,21 @@ Cypress.Commands.add('checkCardLabelValue', (label) => {
     label.parent().find('span').eq(1).should('not.be.empty')
 })
 
+Cypress.Commands.add('getFilterComponent', (label) => {
+    cy.get('label').contains(label).parent().parent().find('input').first().scrollIntoView()
+})
+
+Cypress.Commands.add('getFilterButtonComponent', (label) => {
+    cy.get('label').contains(label).parent().parent().find('button').first().scrollIntoView()
+})
+
+Cypress.Commands.add('applyFiltersButton', () => {
+    cy.get('button').contains('Apply').scrollIntoView()
+})
+
+Cypress.Commands.add('getColumnSortButton', (label) => {
+    cy.contains('button', label)
+  .scrollIntoView()
+  .as('invoiceButton');
+})
+

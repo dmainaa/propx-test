@@ -46,10 +46,32 @@
             "Balance"
         ]
     },
+    "invoiceListColumns": [
+        "Invoice",
+        "Date",
+        "Tenant",
+        "Total",
+        "Status",
+        "Action"
+    ],
     "viewInvoiceTabs": [
         " Invoice Items",
         " Receipt",
         " Credit Note"
+    ],
+    "filters": [
+        "Property",
+        "Lease ID",
+        "Per page",
+        "Due Date",
+        "Created Date"
+    ],
+    "statusFilters": [
+        "Pending",
+        "Unpaid",
+        "Partially paid",
+        "Paid",
+        "Cancelled"
     ]
 
 }

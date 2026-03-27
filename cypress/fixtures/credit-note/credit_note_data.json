@@ -1,0 +1,73 @@
+{
+    "creditNoteListTitle": "Credit Notes",
+    "creditNoteListDescription": "Manage and track all credit notes",
+    "tableHeaders": [
+        "Credit Note",
+        "Tenant",
+        "Date",
+        "Amount",
+        "Status",
+        "Action"
+    ],
+    "createButtonText": "Create Credit Note",
+    "searchHintText": "Search credit notes...",
+    "deleteButtonText": "Delete",
+    "creditNoteNumberLabel": "creditNote Number",
+    "creditNoteDetailsCard":  {
+        "title": "Credit Note Details",
+        "labels": [
+            "Credit Note Number",
+            "Due Date",
+            "Created"
+        ],
+        "notesLabel": "Notes"
+    },
+    "leaseInfoCard":  {
+        "title": "Lease Information",
+        "labels": [
+            "Tenant",
+            "Lease ID",
+            "Rent Per Month",
+            "Service Charge Per Month",
+            "Property",
+            "Currency"
+        ]
+    },
+    "creditNoteSummaryCard":  {
+        "title": "Credit Note Summary",
+        "labels": [
+            "Status:",
+            "Subtotal",
+            "Tax",
+            "Total",
+            "Paid",
+            "Balance"
+        ]
+    },
+    "creditNoteListColumns": [
+        "creditNote",
+        "Date",
+        "Tenant",
+        "Total",
+        "Status",
+        "Action"
+    ],
+    "viewcreditNoteTabs": [
+        "  Credit Note Items",
+        "  Invoice"
+    ],
+    "filters": [
+        "Property",
+        "Filter by Lease",
+        "Status",
+        "Due Date",
+        " Created At",
+        "Items per page"
+    ],
+    "statusFilters": [
+        "Pending",
+        "Applied",
+        "Cancelled"
+    ]
+
+}

@@ -179,3 +179,7 @@ Cypress.Commands.add('getColumnSortButton', (label) => {
   .as('invoiceButton');
 })
 
+Cypress.Commands.add('getTableAddItemComponentButton', (label) => {
+    cy.get('main').find('button').contains(label ?? 'Add Item')
+})
+

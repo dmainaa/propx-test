@@ -68,6 +68,26 @@
         "Pending",
         "Applied",
         "Cancelled"
-    ]
+    ],
+    "createFormLabels": [
+        "Due Date",
+        "Select Lease",
+        "Link to Invoice",
+        "Reference Number",
+        "Notes",
+        "Summary",
+        "Invoice Creditable Amount",
+        "Credit Amount",
+        "Invoice Balance"
+    ],
+    "createFormHints": [
+        "Search leases...",
+        "Search invoices...",
+        "Enter reference number",
+        "Enter notes",
+        "Select component",
+        "Item notes"
+    ],
+    "submitButtonLabel": "Create Credit Note"
 
 }

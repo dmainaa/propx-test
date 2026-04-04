@@ -1,0 +1,62 @@
+{
+    "receiptListTitle": "Receipts",
+    "receiptListDescription": "Manage and track payment receipts",
+    "tableHeaders": [
+        "Receipt Number",
+        "Paying User",
+        "Date",
+        "Amount",
+        "Status",
+        "Action"
+    ],
+    "createButtonText": "Create Receipt",
+    "searchHintText": "Search receipts...",
+    "deleteButtonText": "Delete",
+    "receiptNumberLabel": "receipt Number",
+    "receiptDetailsCard":  {
+        "title": "Receipt Details",
+        "labels": [
+            "Receipt Number",
+            "Transaction Number",
+            "Transaction Date",
+            "Created"
+        ],
+        "notesLabel": "Notes"
+    },
+    "paymentInfoCard":  {
+        "title": "Payment Information",
+        "labels": [
+            "Paying User",
+            "Payment Method",
+            "Receiving Account",
+            "Account Number",
+            "Currency"
+        ]
+    },
+    "receiptSummaryCard":  {
+        "title": "Receipt Summary",
+        "labels": [
+            "Status:",
+            "Amount",
+            "Allocated",
+            "Balance"
+        ]
+    },
+
+    "viewreceiptTabs": [
+        "Allocations"
+    ],
+    "filters": [
+        "Receiving Account",
+        "Payment Method",
+        "Status",
+        "Transaction Date",
+        "Created At"
+    ],
+    "statusFilters": [
+        "Pending",
+        "Applied",
+        "Cancelled"
+    ]
+
+}

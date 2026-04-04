@@ -183,3 +183,36 @@ Cypress.Commands.add('getTableAddItemComponentButton', (label) => {
     cy.get('main').find('button').contains(label ?? 'Add Item')
 })
 
+
+
+Cypress.Commands.add('makeAPIRequest', (url, requestType, headers = {}, body = null, useToken = true) => {
+    const makeRequest = () => {
+        const authHeaders = useToken ? { Authorization: `Bearer ${Cypress.env('token')}` } : {}
+        const requestOptions = {
+            method: requestType,
+            url: url,
+            headers: { ...authHeaders, ...headers },
+            failOnStatusCode: false
+        }
+
+        if (body !== null) {
+            requestOptions.body = body
+        }
+
+        return cy.request(requestOptions)
+    }
+
+    if (useToken && Cypress.env('token') == null) {
+        return cy.loginUserViaApi(Cypress.env('adminUsername'), Cypress.env('adminPassword')).then(makeRequest)
+    }
+
+    return makeRequest()
+})
+
+Cypress.Commands.add('getListFilterButton', () => {
+    cy.get('main').find('button').eq(1)
+})
+
+Cypress.Commands.add('getTableHeaders', () => {
+    cy.get('thead').find('tr')
+})

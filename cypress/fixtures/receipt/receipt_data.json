@@ -55,8 +55,22 @@
     ],
     "statusFilters": [
         "Pending",
-        "Applied",
+        "Confirmed",
         "Cancelled"
+    ],
+
+    "formFieldHints": [
+        "Transaction Number",
+        "Transaction Date",
+        "Paying User",
+        "Receiving Account",
+        "Payment Method",
+        "Amount",
+        "Currency",
+        "Total Allocated:",
+        "Receipt Amount:",
+        "Balance:"
+
     ]
 
 }

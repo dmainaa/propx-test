@@ -216,3 +216,23 @@ Cypress.Commands.add('getListFilterButton', () => {
 Cypress.Commands.add('getTableHeaders', () => {
     cy.get('thead').find('tr')
 })
+
+Cypress.Commands.add('getFieldByLabel', (label, inputType) => {
+    cy.get('label').contains(label).parent().parent().find(inputType).first()
+})
+
+Cypress.Commands.add('getFormInputField', (label) => {
+    cy.getFieldByLabel(label, 'input')
+})
+
+Cypress.Commands.add('getFormButtonField', (label) => {
+    cy.getFieldByLabel(label, 'button')
+})
+
+Cypress.Commands.add('tableInput', (index = 0, selector = 'input')=> {
+    cy.get('table').first().find(`tbody tr td `).eq(index).find(`${selector}`)
+})
+
+Cypress.Commands.add('getValueComponentByLabel', (label)=> {
+    cy.contains('span', label).parent().find('span').eq(1)
+})

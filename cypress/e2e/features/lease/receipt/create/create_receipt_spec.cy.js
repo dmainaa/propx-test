@@ -30,9 +30,45 @@ describe("Create Receipt Test Suite", () => {
             paymentMethod: true,
             currency: true,
             invoice: true,
-            amount: receiptData.formFieldHints[5]
+            amount: 200
         })
 
         createReceiptPage.addInvoiceButton.should('be.visible')
     })
+
+    it('Verify that the receipt summary is correct', () => {
+
+        createReceiptPage.fillReceiptForm({
+            transactionNumber: receiptData.formFieldHints[0],
+            transactionDate: true,
+            payingUser: true,
+            receivingAccount: true,
+            paymentMethod: true,
+            currency: true,
+            invoice: true,
+            amount: 200
+        })
+
+        createReceiptPage.receiptAmountText.invoke('text').then((receiptAmountText) => {
+            createReceiptPage.totalAllocatedText.invoke('text').then((totalAllocatedText) => {
+                createReceiptPage.balanceText.invoke('text').then((balanceText) => {
+                    cy.parseFormattedAmount(receiptAmountText).then((receiptAmount) => {
+                        cy.parseFormattedAmount(totalAllocatedText).then((totalAllocated) => {
+                            cy.parseFormattedAmount(balanceText).then((balance) => {
+                                expect(balance).to.eq(receiptAmount - totalAllocated)
+                            })
+                        })
+                    })
+                })
+            })
+        })
+    })
+
+    // it('Verify a receipt can be created successfully when all the items are filled', () => {
+    //     createReceiptPage.createReceipt().then((receipt) => {
+    //         expect(receipt.id).to.be.a('number')
+    //         expect(receipt.amount).to.exist
+    //         expect(receipt.transactionNumber).to.be.a('string')
+    //     })
+    // })
 })

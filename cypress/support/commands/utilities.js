@@ -236,3 +236,7 @@ Cypress.Commands.add('tableInput', (index = 0, selector = 'input')=> {
 Cypress.Commands.add('getValueComponentByLabel', (label)=> {
     cy.contains('span', label).parent().find('span').eq(1)
 })
+
+Cypress.Commands.add('parseFormattedAmount', (value) => {
+    return cy.wrap(parseFloat(value.replace(/[^0-9.]/g, '')))
+})

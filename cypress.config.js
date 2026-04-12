@@ -34,6 +34,8 @@ module.exports = defineConfig({
       appAPIUrl: `${process.env.API_URL}/app/1`,
       tenantAPIUrl: `${process.env.API_URL}/tenant`,
       vendorAPIUrl: `${process.env.API_URL}/vendor`,
+      adminUsername: process.env.CYPRESS_adminUsername,
+      adminPassword: process.env.CYPRESS_adminPassword
     }
   },
 

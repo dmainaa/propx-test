@@ -58,7 +58,6 @@ Cypress.Commands.add('login', (email, password) => {
 
 Cypress.Commands.add('loginAsSuperAdmin', () => {
 
-    cy.session('superAdmin', () => {
         cy.visit(ROUTES.auth.child(SEGMENTS.AUTH.LOGIN))
         cy.get('input[type="text"][placeholder="you@example.com or +254712345678"]').as('emailInputField')
         cy.get('input[type="password"]').as('passwordInputField')
@@ -68,7 +67,7 @@ Cypress.Commands.add('loginAsSuperAdmin', () => {
         cy.clickSubmit()
         cy.contains('Staff').click()
         cy.contains('Property Management').click()
-    })
+
 
 })
 

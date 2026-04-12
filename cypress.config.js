@@ -30,7 +30,10 @@ module.exports = defineConfig({
     appApiUrl: appApiUrl,
     screenshotOnRunFailure: process.env.CYPRESS_SCREENSHOT !== 'false',
     env: {
-      appUrl: process.env.APP_URL
+      apiUrl: process.env.API_URL,
+      appAPIUrl: `${process.env.API_URL}/app/1`,
+      tenantAPIUrl: `${process.env.API_URL}/tenant`,
+      vendorAPIUrl: `${process.env.API_URL}/vendor`,
     }
   },
 

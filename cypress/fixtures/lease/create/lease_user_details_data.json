@@ -1,0 +1,15 @@
+{
+    "title": "Step 1: User Details",
+    "labels": [
+        "Tenant",
+        " Tenant not in list? Add new tenant",
+        "Use Existing Tenant"
+    ],
+    "errorTexts": [
+        "Please select a tenant",
+        "Name is required",
+        "Email is required",
+        "Phone is required",
+        "ID Tax PIN is required"
+    ]
+}

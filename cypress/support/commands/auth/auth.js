@@ -56,19 +56,18 @@ Cypress.Commands.add('login', (email, password) => {
     cy.clickSubmit()
 })
 
-Cypress.Commands.add('loginAsSuperAdmin', () => {
+Cypress.Commands.add('loginAsSuperAdmin', (portal = 'Property Management') => {
 
-    cy.session('superAdmin', () => {
         cy.visit(ROUTES.auth.child(SEGMENTS.AUTH.LOGIN))
         cy.get('input[type="text"][placeholder="you@example.com or +254712345678"]').as('emailInputField')
         cy.get('input[type="password"]').as('passwordInputField')
         cy.get('button[type="submit"]').as('submitButton')
-        cy.get('@emailInputField').type(Cypress.env('adminUsername'))
-        cy.get('@passwordInputField').type(Cypress.env('adminPassword'))
+        cy.get('@emailInputField').type('0715823592')
+        cy.get('@passwordInputField').type('password')
         cy.clickSubmit()
         cy.contains('Staff').click()
-        cy.contains('Property Management').click()
-    })
+        cy.contains(portal).click()
+
 
 })
 

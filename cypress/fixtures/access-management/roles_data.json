@@ -1,0 +1,7 @@
+{
+    "pageTitle": "Roles Management",
+    "pageSubtitle": "Manage and define roles for user groups across companies.",
+    "createButtonText": " Create Role",
+    "searchHintText": "Search by name or ID...",
+    "tableColumns": ["Role ID", "Role Name", "Enforce On Facility", "User Group", "Date Created", "Action"]
+}

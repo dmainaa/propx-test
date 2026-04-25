@@ -1,3 +1,4 @@
+import commonData from "../../fixtures/common.json"
 
 const generateRandomString = (length = 10, charset = 'alphanumeric') => {
     let characters
@@ -239,4 +240,12 @@ Cypress.Commands.add('getValueComponentByLabel', (label)=> {
 
 Cypress.Commands.add('parseFormattedAmount', (value) => {
     return cy.wrap(parseFloat(value.replace(/[^0-9.]/g, '')))
+})
+
+Cypress.Commands.add('getNextButton', () => {
+    cy.contains('button', commonData.next)
+})
+
+Cypress.Commands.add('getCancelButton', () => {
+    cy.contains('button', commonData.cancel)
 })

@@ -8,6 +8,7 @@ export const SEGMENTS = {
       LEASEAPPLICATIONS: 'leaseApplications',
       PROPERTYMANAGEMENT: 'property-management',
       LEASEMANAGEMENT: 'lease-management',
+      ACCESSMANAGEMENT: 'access-management',
       RECEIPTS: 'receipts',
     },
     AUTH: {
@@ -23,7 +24,10 @@ export const SEGMENTS = {
         RECEIPTS: 'receipts',
         LEASES: 'leases',
         LEASEAPPLICATIONS: 'lease-applications'
-      }
+      },
+    ACCESSMANAGEMENT: {
+      ROLES: 'roles'
+    }  
     
   };
   

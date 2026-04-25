@@ -1,0 +1,80 @@
+{
+    "dashboard": "Dashboard",
+    "tickets": "Tickets",
+    "tenantManagement": {
+        "index": "Tenant Management",
+        "leaseManagement": {
+            "title": "Lease Management",
+            "items": {
+                "leases": "Leases",
+                "leaseApplications": "Lease Applications",
+                "exitNotices": "Exit Notices"
+            }
+        },
+        "billingAndReceipting": {
+            "title": "Billing And Receipting",
+            "items": {
+                "invoices": "Invoices",
+                "creditNotes": "Credit Notes",
+                "receipts": "Receipts",
+                "utilityBilling": "Utility Billing",
+                "landFeeBilling": "Land Fee Billing"
+            }
+        },
+        "tenants": {
+            "title": "Tenants",
+            "items": {
+                "noticeBoard": "Notice Board"
+            }
+        }
+    },
+    "landlordManagement": {
+        "index": "Landlord Management",
+        "propertyManagement": {
+            "title": "Property Management",
+            "items": {
+                "properties": "Properties",
+                "spaces": "Spaces"
+            }
+        },
+        "landlordPayments": {
+            "title": "Landlord Payments",
+            "items": {
+                "remittances": "Remittances",
+                "paymentVouchers": "Payment Vouchers",
+                "settlements": "Settlements"
+            }
+        },
+        "landlords": {
+            "title": "Landlords",
+            "items": {
+                "noticeBoard": "Notice Board"
+            }
+        }
+    },
+    "supplierManagement": {
+        "index": "Supplier Management",
+        "procurement": {
+            "title": "Procurement",
+            "items": {
+                "procurementRequests": "Procurement Requests",
+                "localPurchaseOrders": "Local Purchase Orders",
+                "serviceContracts": "Service Contracts"
+            }
+        },
+        "supplierPayments": {
+            "title": "Supplier Payments",
+            "items": {
+                "bills": "Bills",
+                "paymentVouchers": "Payment Vouchers",
+                "settlements": "Settlements"
+            }
+        },
+        "suppliers": {
+            "title": "Suppliers",
+            "items": {
+                "noticeBoard": "Notice Board"
+            }
+        }
+    }
+}

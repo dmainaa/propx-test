@@ -6,6 +6,8 @@ const LEASEMANAGEMENT = `${PROPERTYMANAGEMENT}/${SEGMENTS.APP.LEASEMANAGEMENT}`
 
 export const API_URLS = {
         
+        "propertyManagementDashboard": `${PROPERTYMANAGEMENT}`,
+        "accessManagementDashboard": `${ACCESSMANAGEMENT}`,
         "receipts": `${LEASEMANAGEMENT}/${SEGMENTS.LEASEMANAGEMENT.RECEIPTS}`,
         "roles": `${ACCESSMANAGEMENT}/${SEGMENTS.ACCESSMANAGEMENT.ROLES}`
 }

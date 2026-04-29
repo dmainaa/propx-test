@@ -1,7 +1,7 @@
-import { StatsGroup } from './dashboard/stats_group'
-import { Engagement } from './dashboard/engagement'
-import { DepartmentDistribution } from './dashboard/department_distribution'
-import { RecentActivity } from './dashboard/recent_activity'
+import { StatsGroup } from './stats_group'
+import { Engagement } from './engagement'
+import { DepartmentDistribution } from './department_distribution'
+import { RecentActivity } from './recent_activity'
 
 export class AccessManagementDashboard {
     constructor(data) {

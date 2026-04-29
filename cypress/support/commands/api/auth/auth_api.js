@@ -63,3 +63,18 @@ Cypress.Commands.add('registerUserViaAPI', (portal, options = {}) => {
     })
 })
 
+Cypress.Commands.add('loginUserViaApi', (username, password) => {
+    return cy.request('POST', `${Cypress.env('apiUrl')}/auth/login`, {
+        "username": username,
+        "password": password
+    }).then((response) => {
+        if(response.status != 200 || response.status != 201 ) {
+            cy.log('Loggin in failed', JSON.stringify(response.body))
+        }
+
+        expect(response.status).to.be.oneOf([200, 201])
+        Cypress.env('token', response.body.data.token)
+    })
+})
+
+

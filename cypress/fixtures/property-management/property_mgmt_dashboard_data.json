@@ -1,0 +1,19 @@
+{
+    "title": "Dashboard",
+    "welcomeText": "Welcome back, track billing health across your portfolio",
+    "allTimeLabel": "All Time",
+    "statsCards": {
+        "billings": "Billings",
+        "collections": "Collections",
+        "arrears": "Arrears"
+    },
+    "lpoStatus": {
+        "title": "LPO Status"
+    },
+    "expiringLeases": {
+        "title": "Expiring Leases"
+    },
+    "openTickets": {
+        "title": "Open Tickets"
+    }
+}
